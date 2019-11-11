@@ -151,12 +151,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="degree.cpp" />
+    <ClCompile Include="NetworkStudent.cpp" />
     <ClCompile Include="roster.cpp" />
     <ClCompile Include="SecurityStudent.cpp" />
+    <ClCompile Include="SoftwareStudent.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="degree.h" />
+    <ClInclude Include="NetworkStudent.h" />
     <ClInclude Include="SecurityStudent.h" />
+    <ClInclude Include="SoftwareStudent.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -4,17 +4,42 @@
 #include <iostream>
 #include "Student.h"
 #include "SecurityStudent.h"
+#include <list>
+#include <iterator>
+#include <string>
 
 int main()
 {
+
+	const std::string studentData[] =
+	{ "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
+	"A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
+	"A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
+	"A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
+	"A5,[firstname],[lastname],[emailaddress],[age],[numberofdaystocomplete3courses],SOFTWARE"
+	};
+
+	std::list<int>::iterator x;
+
 	SecurityStudent student("Ben", "Jamison", "A1", "e@mail.com", 20, 20, 30, 40);
-	std::cout << student.first_name;
+	std::cout << student.get_first_name();
 	std::cout << "\n";
-	std::cout << student.last_name;
+	student.set_first_name("Todd");
+	std::cout << student.get_first_name();
 	std::cout << "\n";
-	std::cout << student.id;
+	std::list<int> days = student.get_days_in_course();
+	for (x = days.begin(); x != days.end(); x++) {
+		std::cout << *x;
+		std::cout << "\n";
+	}
 	std::cout << "\n";
 	std::cout << student.degree;
+	//std::cout << "\n";
+	//std::cout << student.last_name;
+	//std::cout << "\n";
+	//std::cout << student.id;
+	//std::cout << "\n";
+	//std::cout << student.degree;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
