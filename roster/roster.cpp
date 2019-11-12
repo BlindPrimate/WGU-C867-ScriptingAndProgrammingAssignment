@@ -7,6 +7,29 @@
 #include <list>
 #include <iterator>
 #include <string>
+#include "Roster.h"
+
+
+
+Roster::Roster(const std::string students[])
+{
+	num_students = (sizeof(students) / sizeof(students[0]));
+	std::cout << students;
+	class_roster_raw = students;
+	Roster::build_class_roster_array();
+}
+
+void Roster::build_class_roster_array()
+{
+	std::cout << class_roster_raw;
+	//Student** classRosterArray = new Student * [num_students];
+	for (int i = 0; i < num_students; i++) {
+		std::string student = class_roster_raw[i];
+		classRosterArray[i] = new Student(student);
+	}
+}
+
+
 
 int main()
 {
@@ -21,19 +44,23 @@ int main()
 
 	std::list<int>::iterator x;
 
+	Roster roster(studentData);
 	SecurityStudent student("Ben", "Jamison", "A1", "e@mail.com", 20, 20, 30, 40);
-	std::cout << student.get_first_name();
-	std::cout << "\n";
-	student.set_first_name("Todd");
-	std::cout << student.get_first_name();
-	std::cout << "\n";
-	std::list<int> days = student.get_days_in_course();
-	for (x = days.begin(); x != days.end(); x++) {
-		std::cout << *x;
-		std::cout << "\n";
-	}
-	std::cout << "\n";
-	std::cout << student.degree;
+	Student* ben = &student;
+	ben->print();
+
+	//std::cout << student.get_first_name();
+	//std::cout << "\n";
+	//student.set_first_name("Todd");
+	//std::cout << student.get_first_name();
+	//std::cout << "\n";
+	//std::list<int> days = student.get_days_in_course();
+	//for (x = days.begin(); x != days.end(); x++) {
+	//	std::cout << *x;
+	//	std::cout << "\n";
+	//}
+	//std::cout << "\n";
+	//std::cout << student.degree;
 	//std::cout << "\n";
 	//std::cout << student.last_name;
 	//std::cout << "\n";

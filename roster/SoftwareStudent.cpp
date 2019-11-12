@@ -1,6 +1,7 @@
 #include "SoftwareStudent.h"
 #include <string>
+#include "degree.h"
 
-std::string SoftwareStudent::get_degree() {
+Degree SoftwareStudent::get_degree_program() {
 	return degree;
 }

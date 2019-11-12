@@ -1,11 +1,13 @@
 #pragma once
 #include "Student.h"
+#include "degree.h"
+
 class SoftwareStudent :
 	public Student
 {
 	using Student::Student;
 	public:
-		std::string degree = "Software";
-		std::string get_degree();
+		Degree degree = Degree::SOFTWARE;
+		Degree get_degree_program();
 };
 

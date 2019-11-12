@@ -1,7 +1,8 @@
 #include "NetworkStudent.h"
 #include <string>
+#include "degree.h"
 
 
-std::string NetworkStudent::get_degree() {
+Degree NetworkStudent::get_degree_program() {
 	return degree;
 }

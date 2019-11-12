@@ -1,8 +1,11 @@
 #include "Student.h"
 #include <string>
 #include <list>
+#include <iostream>
 
-Student::Student(std::string s_first_name,
+
+Student::Student(
+	std::string s_first_name,
 	std::string s_last_name,
 	std::string s_id,
 	std::string s_email,
@@ -19,6 +22,13 @@ Student::Student(std::string s_first_name,
 	age = s_age;
 	days_in_course = { days_1, days_2, days_3 };
 }
+
+Student::~Student()
+{
+	
+}
+
+
 
 // getters
 std::string Student::get_first_name()
@@ -54,6 +64,7 @@ std::list<int> Student::get_days_in_course()
 
 
 
+
 // setters
 void Student::set_first_name(std::string value)
 {
@@ -84,4 +95,5 @@ void Student::set_days_in_course(std::list<int> value)
 {
 	days_in_course = value;
 }
+
 

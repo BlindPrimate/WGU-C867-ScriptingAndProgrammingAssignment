@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="degree.h" />
     <ClInclude Include="NetworkStudent.h" />
+    <ClInclude Include="Roster.h" />
     <ClInclude Include="SecurityStudent.h" />
     <ClInclude Include="SoftwareStudent.h" />
     <ClInclude Include="Student.h" />
