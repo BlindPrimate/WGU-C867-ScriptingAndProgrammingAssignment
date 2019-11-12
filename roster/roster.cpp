@@ -4,30 +4,82 @@
 #include <iostream>
 #include "Student.h"
 #include "SecurityStudent.h"
-#include <list>
+#include "SoftwareStudent.h"
+#include "NetworkStudent.h"
 #include <iterator>
+#include <sstream>
+#include <vector>
 #include <string>
+#include <algorithm>
 #include "Roster.h"
 
 
-
-Roster::Roster(const std::string students[])
+inline bool isInteger(const std::string& s)
 {
-	num_students = (sizeof(students) / sizeof(students[0]));
-	std::cout << students;
-	class_roster_raw = students;
-	Roster::build_class_roster_array();
+	if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
+
+	char* p;
+	strtol(s.c_str(), &p, 10);
+
+	return (*p == 0);
 }
 
-void Roster::build_class_roster_array()
+Roster::Roster(const std::string students[], int student_arr_size) : class_roster_raw(students)
 {
-	std::cout << class_roster_raw;
-	//Student** classRosterArray = new Student * [num_students];
-	for (int i = 0; i < num_students; i++) {
-		std::string student = class_roster_raw[i];
-		classRosterArray[i] = new Student(student);
+	for (int i = 0; i < student_arr_size - 1; i++) {
+
+		std::vector<std::string> stripped_strs;
+		std::vector<int> stripped_days;
+		std::stringstream ss(class_roster_raw[i]);
+		while (ss.good()) {
+			std::string new_str;
+			std::getline(ss, new_str, ',');
+			if (isInteger(new_str)) {
+				stripped_days.push_back(std::stoi(new_str));
+				//std::cout << "ints: " << new_str << std::endl;
+			}
+			stripped_strs.push_back(new_str);
+			//std::cout << new_str << std::endl;
+		}
+
+		//for (i = 0; i < stripped_strs.size(); i++) {
+		//	std::cout << stripped_strs[i] << std::endl;
+		//}
+
+		//for (i = 0; i < stripped_days.size(); i++) {
+		//	std::cout << stripped_days[i] << std::endl;
+		//}
+
+
+		Roster::add(stripped_strs[0], stripped_strs[1], stripped_strs[2], stripped_strs[3],
+			stripped_days[0], stripped_days[1], stripped_days[2], stripped_days[3], stripped_strs[8]);
+
 	}
 }
+
+
+void Roster::add(std::string first_name, std::string last_name, std::string id, std::string email,
+				int age, int days_1, int days_2, int days_3, std::string degree)
+{
+		// initialize pointer for student object
+		Student* ptr = nullptr;
+	
+		// sort student based on degree
+		if (degree == "NETWORK" ) {
+			std::cout << "network" << std::endl;
+			ptr = new NetworkStudent(first_name, last_name, id, email, age, days_1, days_2, days_3);
+		} else if (degree == "SECURITY") {
+			std::cout << "security" << std::endl;
+			ptr = new SecurityStudent(first_name, last_name, id, email, age, days_1, days_2, days_3);
+		} else {
+			std::cout << "software" << std::endl;
+			ptr = new SoftwareStudent(first_name, last_name, id, email, age, days_1, days_2, days_3);
+		}
+
+		class_roster_array[student_roster_index] = ptr;
+
+}
+
 
 
 
@@ -42,40 +94,6 @@ int main()
 	"A5,[firstname],[lastname],[emailaddress],[age],[numberofdaystocomplete3courses],SOFTWARE"
 	};
 
-	std::list<int>::iterator x;
 
-	Roster roster(studentData);
-	SecurityStudent student("Ben", "Jamison", "A1", "e@mail.com", 20, 20, 30, 40);
-	Student* ben = &student;
-	ben->print();
-
-	//std::cout << student.get_first_name();
-	//std::cout << "\n";
-	//student.set_first_name("Todd");
-	//std::cout << student.get_first_name();
-	//std::cout << "\n";
-	//std::list<int> days = student.get_days_in_course();
-	//for (x = days.begin(); x != days.end(); x++) {
-	//	std::cout << *x;
-	//	std::cout << "\n";
-	//}
-	//std::cout << "\n";
-	//std::cout << student.degree;
-	//std::cout << "\n";
-	//std::cout << student.last_name;
-	//std::cout << "\n";
-	//std::cout << student.id;
-	//std::cout << "\n";
-	//std::cout << student.degree;
+	Roster roster(studentData, 5);
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
