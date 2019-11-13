@@ -7,7 +7,7 @@ class SoftwareStudent :
 {
 	using Student::Student;
 	public:
-		Degree degree = Degree::SOFTWARE;
-		Degree get_degree_program();
+		virtual std::string get_degree_program();
+		virtual void print();
 };
 

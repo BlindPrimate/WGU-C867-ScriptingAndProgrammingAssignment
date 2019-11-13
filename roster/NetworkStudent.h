@@ -7,7 +7,7 @@ class NetworkStudent :
 {
 	using Student::Student;
 	public:
-		Degree degree = Degree::NETWORK;
-		Degree get_degree_program();
+		virtual std::string get_degree_program();
+		virtual void print();
 };
 

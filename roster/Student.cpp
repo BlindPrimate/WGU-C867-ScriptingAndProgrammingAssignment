@@ -1,12 +1,12 @@
 #include "Student.h"
 #include <string>
-#include <list>
+#include <vector>
 #include <iostream>
 
 
-Student::Student(std::string first_name, std::string last_name, std::string id, std::string email, int age,
+Student::Student(std::string id, std::string first_name, std::string last_name, std::string email, int age,
 				int days_1, int days_2, int days_3)
-	: first_name(first_name), last_name(last_name), id(id), email(email), age(age), days_1(days_1), days_2(days_2), days_3(days_3)
+	: id(id),  first_name(first_name), last_name(last_name), email(email), age(age), days_1(days_1), days_2(days_2), days_3(days_3)
 		
 {
 	return;
@@ -45,9 +45,22 @@ int Student::get_age()
 	return age;
 }
 
-std::list<int> Student::get_days_in_course()
+std::string Student::get_days_in_course()
 {
-	return days_in_course;
+	std::vector<int> days;
+	std::string result = "(";
+	days.push_back(days_1);
+	days.push_back(days_2);
+	days.push_back(days_3);
+	for (int i = 0; i < days.size(); i++) {
+		std::string str = std::to_string(days[i]);
+		if (i == days.size() - 1) {
+			result = result + str + ")";
+		} else {
+			result = result + str + ", ";
+		}
+	}
+	return result;
 }
 
 
@@ -80,9 +93,11 @@ void Student::set_age(int value)
 	age = value;
 }
 
-void Student::set_days_in_course(std::list<int> value)
+void Student::set_days_in_course(int day_1, int day_2, int day_3)
 {
-	days_in_course = value;
+	days_1 = day_1;
+	days_2 = day_2;
+	days_3 = day_3;
 }
 
 

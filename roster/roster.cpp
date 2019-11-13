@@ -58,28 +58,42 @@ Roster::Roster(const std::string students[], int student_arr_size) : class_roste
 }
 
 
-void Roster::add(std::string first_name, std::string last_name, std::string id, std::string email,
+void Roster::add(std::string id, std::string first_name, std::string last_name, std::string email,
 				int age, int days_1, int days_2, int days_3, std::string degree)
 {
 		// initialize pointer for student object
-		Student* ptr = nullptr;
+		Student *ptr = nullptr;
 	
 		// sort student based on degree
 		if (degree == "NETWORK" ) {
 			std::cout << "network" << std::endl;
-			ptr = new NetworkStudent(first_name, last_name, id, email, age, days_1, days_2, days_3);
+			ptr = new NetworkStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
+			std::cout << ptr << std::endl;
 		} else if (degree == "SECURITY") {
 			std::cout << "security" << std::endl;
-			ptr = new SecurityStudent(first_name, last_name, id, email, age, days_1, days_2, days_3);
+			ptr = new SecurityStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
 		} else {
 			std::cout << "software" << std::endl;
-			ptr = new SoftwareStudent(first_name, last_name, id, email, age, days_1, days_2, days_3);
+			ptr = new SoftwareStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
 		}
 
 		class_roster_array[student_roster_index] = ptr;
-
+		student_roster_index++;
 }
 
+void Roster::remove(std::string student_id)
+{
+	return;
+}
+
+void Roster::print_all() {
+	
+	for (int i = 0; i < student_roster_index; i++) {
+		Student student = *class_roster_array[i];
+		std::cout << student.get_degree_program();
+	}
+
+}
 
 
 
@@ -96,4 +110,5 @@ int main()
 
 
 	Roster roster(studentData, 5);
+	roster.print_all();
 }
