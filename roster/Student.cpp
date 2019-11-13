@@ -39,7 +39,7 @@ std::string Student::get_id()
 
 std::string Student::get_email()
 {
-	return id;
+	return email;
 }
 
 int Student::get_age()
@@ -68,6 +68,10 @@ std::string Student::get_days_in_course()
 }
 
 
+unsigned int Student::get_average_days_in_course()
+{
+	return (days_1 + days_2 + days_3) / 3;
+}
 
 
 
@@ -89,7 +93,7 @@ void Student::set_id(std::string value)
 
 void Student::set_email(std::string value)
 {
-	id = value;
+	email = value;
 }
 
 void Student::set_age(int value)

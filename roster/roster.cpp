@@ -12,6 +12,7 @@
 #include <string>
 #include <algorithm>
 #include "Roster.h"
+#include <regex>
 
 
 // check if value passed is an integer
@@ -121,7 +122,8 @@ void Roster::remove(std::string student_id)
 }
 
 // print contents of student array
-void Roster::print_all() {
+void Roster::print_all() 
+{
 	std::cout << "Printing Roster:" << std::endl;
 	for (int i = 0; i < student_total; i++) {
 		Student* student = class_roster_array[i];
@@ -130,6 +132,32 @@ void Roster::print_all() {
 	}
 }
 
+void Roster::print_days_in_course(std::string student_id) 
+{
+	int student_pos = student_position_index(student_id);
+	Student* student = class_roster_array[student_pos];
+	unsigned int days = student->get_average_days_in_course();
+	std::cout << days << std::endl;
+}
+
+void Roster::print_invalid_emails()
+{
+	std::regex proper_email_addr("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+	for (int i = 0; i < student_total; i++) {
+		Student* student = class_roster_array[i];
+		std::string email = student->get_email();
+
+		if (!std::regex_match(email, proper_email_addr)) {
+			std::cout << "Invalid Email: " << email << std::endl;
+		}
+
+	}
+}
+
+void Roster::print_by_degree_type(std::string degree_program)
+{
+	Degree degree;
+}
 
 
 int main()
@@ -148,5 +176,7 @@ int main()
 	roster.print_all();
 	roster.remove("A2");
 	roster.remove("D1");
+	roster.print_days_in_course("A4");
 	roster.print_all();
+	roster.print_invalid_emails();
 }

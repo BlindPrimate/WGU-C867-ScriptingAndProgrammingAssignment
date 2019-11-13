@@ -5,7 +5,7 @@
 
 class Student
 {
-	private:
+	protected:
 		std::string first_name, last_name, id, degree, email;
 		int age, days_1, days_2, days_3;
 
@@ -31,6 +31,7 @@ class Student
 		std::string get_id();
 		std::string get_email();
 		std::string get_days_in_course();
+		unsigned int get_average_days_in_course();
 		int get_age();
 
 
