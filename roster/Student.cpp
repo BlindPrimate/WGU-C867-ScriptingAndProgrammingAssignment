@@ -101,3 +101,7 @@ void Student::set_days_in_course(int day_1, int day_2, int day_3)
 }
 
 
+void Student::print() {
+	return;
+}
+

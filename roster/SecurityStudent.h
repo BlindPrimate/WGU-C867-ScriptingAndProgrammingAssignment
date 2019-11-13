@@ -7,8 +7,8 @@ class SecurityStudent :
 {
 	using Student::Student;
 	public:
-		virtual std::string get_degree_program();
-		virtual void print();
+		std::string get_degree_program();
+		void print() override;
 
 };
 

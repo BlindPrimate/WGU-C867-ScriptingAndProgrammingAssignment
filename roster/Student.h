@@ -23,7 +23,7 @@ class Student
 
 		~Student();
 
-		virtual void print() { return; };
+		virtual void print();
 		virtual std::string get_degree_program() { return NULL; };
 
 		std::string get_first_name();

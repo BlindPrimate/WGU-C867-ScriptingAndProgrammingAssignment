@@ -14,6 +14,8 @@
 #include "Roster.h"
 
 
+
+
 inline bool isInteger(const std::string& s)
 {
 	if (s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false;
@@ -26,7 +28,7 @@ inline bool isInteger(const std::string& s)
 
 Roster::Roster(const std::string students[], int student_arr_size) : class_roster_raw(students)
 {
-	for (int i = 0; i < student_arr_size - 1; i++) {
+	for (int i = 0; i < student_arr_size; i++) {
 
 		std::vector<std::string> stripped_strs;
 		std::vector<int> stripped_days;
@@ -36,19 +38,9 @@ Roster::Roster(const std::string students[], int student_arr_size) : class_roste
 			std::getline(ss, new_str, ',');
 			if (isInteger(new_str)) {
 				stripped_days.push_back(std::stoi(new_str));
-				//std::cout << "ints: " << new_str << std::endl;
 			}
 			stripped_strs.push_back(new_str);
-			//std::cout << new_str << std::endl;
 		}
-
-		//for (i = 0; i < stripped_strs.size(); i++) {
-		//	std::cout << stripped_strs[i] << std::endl;
-		//}
-
-		//for (i = 0; i < stripped_days.size(); i++) {
-		//	std::cout << stripped_days[i] << std::endl;
-		//}
 
 
 		Roster::add(stripped_strs[0], stripped_strs[1], stripped_strs[2], stripped_strs[3],
@@ -66,14 +58,10 @@ void Roster::add(std::string id, std::string first_name, std::string last_name, 
 	
 		// sort student based on degree
 		if (degree == "NETWORK" ) {
-			std::cout << "network" << std::endl;
 			ptr = new NetworkStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
-			std::cout << ptr << std::endl;
 		} else if (degree == "SECURITY") {
-			std::cout << "security" << std::endl;
 			ptr = new SecurityStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
 		} else {
-			std::cout << "software" << std::endl;
 			ptr = new SoftwareStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
 		}
 
@@ -87,12 +75,11 @@ void Roster::remove(std::string student_id)
 }
 
 void Roster::print_all() {
-	
 	for (int i = 0; i < student_roster_index; i++) {
-		Student student = *class_roster_array[i];
-		std::cout << student.get_degree_program();
+		Student* student = class_roster_array[i];
+		std::cout << i + 1 << " ";
+		student->print(); 
 	}
-
 }
 
 
@@ -105,7 +92,7 @@ int main()
 	"A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
 	"A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
 	"A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-	"A5,[firstname],[lastname],[emailaddress],[age],[numberofdaystocomplete3courses],SOFTWARE"
+	"A5,Eric,Cleek, ecleek@gmail.com,34,50,58,40,SOFTWARE",
 	};
 
 
