@@ -8,12 +8,15 @@ class Roster
 {
 
 	private:
-		int student_roster_index;
+		int student_total;
 		const std::string* class_roster_raw;
+		int student_position_index(std::string student_id);
+		void delete_student_entry(int student_array_index);
 		Student* class_roster_array[50];
 
 	public:
 		Roster(const std::string students[], int num_students);
+
 
 		void add(std::string id, std::string first_name, std::string last_name, std::string email,
 			int age, int days_1, int days_2, int days_3, std::string degree);

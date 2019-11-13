@@ -44,7 +44,6 @@ Roster::Roster(const std::string students[], int student_arr_size) : class_roste
 			stripped_strs.push_back(new_str);
 		}
 
-
 		// add student
 		Roster::add(stripped_strs[0], stripped_strs[1], stripped_strs[2], stripped_strs[3],
 			stripped_days[0], stripped_days[1], stripped_days[2], stripped_days[3], stripped_strs[8]);
@@ -71,38 +70,52 @@ void Roster::add(std::string id, std::string first_name, std::string last_name, 
 		}
 
 		// pass student object pointer to class_roster_array
-		class_roster_array[student_roster_index] = ptr;
-		student_roster_index++;
+		class_roster_array[student_total] = ptr;
+		student_total++;
 }
 
 
-void Roster::remove(std::string student_id)
+// returns positional index of student within class_roster_array by passing student id as parameter or NULL if not found
+int Roster::student_position_index(std::string student_id)
 {
 	Student* student;
-	std::string id;
-	bool is_removed = false;
-	// loop student roster
-	for (int i = 0; i < student_roster_index; i++) {
+	for (int i = 0; i < student_total; i++) {
+		// returns student object with appropriate ID
 		student = class_roster_array[i];
-		id = student->get_id();
-		// check against ID parameter and delete if student matches
-		if (id == student_id) {
-			is_removed = true;
-
-			// delete student obj
-			student->~Student();
-
-			// delete item from array
-			for (int j = i; j < student_roster_index; i++) {
-				class_roster_array[j++] = class_roster_array[i + 1];
-			}
-			student_roster_index--;
-			break;
+		// returns position index
+		if (student->get_id() == student_id) {
+			return i;
 		}
 	}
-	// if ID isn't found, print
-	if (!is_removed) {
-		std::cout << "Student ID: '" << id <<  "' not found." << std::endl;
+	// else returns NULL
+	return NULL;
+}
+
+
+// deletes target student object in array, deletes obj, and removes from array
+void Roster::delete_student_entry(int student_array_index) {
+		Student* student;
+		student = class_roster_array[student_array_index];
+		student->~Student();
+		for (int i = student_array_index; i < student_total; i++) {
+			class_roster_array[i] = class_roster_array[i + 1];
+		}
+		student_total--;
+}
+
+
+// remove student from array from passed student ID parameter
+void Roster::remove(std::string student_id)
+{
+
+	int position = student_position_index(student_id);
+
+	// if student ID exists, delete student
+	if (position) {
+		delete_student_entry(position);
+	}
+	else {      // if ID isn't found, print
+		std::cout << "Student ID: '" << student_id <<  "' not found." << std::endl;
 	}
 	return;
 }
@@ -110,7 +123,7 @@ void Roster::remove(std::string student_id)
 // print contents of student array
 void Roster::print_all() {
 	std::cout << "Printing Roster:" << std::endl;
-	for (int i = 0; i < student_roster_index; i++) {
+	for (int i = 0; i < student_total; i++) {
 		Student* student = class_roster_array[i];
 		std::cout << i + 1 << " ";
 		student->print(); 
