@@ -4,6 +4,7 @@
 #include <iostream>
 
 
+// constructor
 Student::Student(std::string id, std::string first_name, std::string last_name, std::string email, int age,
 				int days_1, int days_2, int days_3)
 	: id(id),  first_name(first_name), last_name(last_name), email(email), age(age), days_1(days_1), days_2(days_2), days_3(days_3)
@@ -12,6 +13,7 @@ Student::Student(std::string id, std::string first_name, std::string last_name, 
 	return;
 }
 
+// destructor
 Student::~Student()
 {
 	return;
@@ -52,11 +54,13 @@ std::string Student::get_days_in_course()
 	days.push_back(days_1);
 	days.push_back(days_2);
 	days.push_back(days_3);
+	// build days in course with format  '(day, day, day)'
 	for (int i = 0; i < days.size(); i++) {
 		std::string str = std::to_string(days[i]);
 		if (i == days.size() - 1) {
 			result = result + str + ")";
-		} else {
+		} 
+		else {
 			result = result + str + ", ";
 		}
 	}
