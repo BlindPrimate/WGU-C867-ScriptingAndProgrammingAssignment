@@ -25,7 +25,7 @@ class Roster
 
 		void print_all();
 
-		void print_days_in_course(std::string student_id);
+		void print_avg_days_in_course(std::string student_id);
 
 		void print_invalid_emails();
 

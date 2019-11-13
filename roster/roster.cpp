@@ -147,12 +147,12 @@ void Roster::print_all()
 	}
 }
 
-void Roster::print_days_in_course(std::string student_id) 
+void Roster::print_avg_days_in_course(std::string student_id) 
 {
 	int student_pos = student_position_index(student_id);
 	Student* student = class_roster_array[student_pos];
 	unsigned int days = student->get_average_days_in_course();
-	std::cout << days << std::endl;
+	std::cout << "Avearge Days in course for ID '" << student->get_id() << "':" << days << std::endl;
 }
 
 void Roster::print_invalid_emails()
@@ -169,9 +169,32 @@ void Roster::print_invalid_emails()
 	}
 }
 
-void Roster::print_by_degree_type(std::string degree_program)
+void Roster::print_by_degree_type(std::string degree_type)
 {
-	Degree degree;
+	Degree temp_degree;
+	if (degree_type == "NETWORK") {
+		temp_degree = NETWORK;
+	}
+	else if (degree_type == "SECURITY") {
+		temp_degree = SECURITY;
+	} 
+	else if (degree_type == "SOFTWARE") {
+		temp_degree = SOFTWARE;
+	}
+	else {
+		temp_degree = UNDECIDED;
+	}
+
+
+	for (int i = 0, j = 1; i < student_total; i++) {
+		Student* student = class_roster_array[i];
+		if (student->get_degree_program() == temp_degree) {
+			std::cout << j << "\t";
+			student->print();
+			j++;
+		}
+	}
+
 }
 
 
@@ -189,9 +212,10 @@ int main()
 
 	Roster roster(studentData, 5);
 	roster.print_all();
-	roster.remove("A2");
-	roster.remove("D1");
-	roster.print_days_in_course("A4");
-	roster.print_all();
 	roster.print_invalid_emails();
+	roster.print_avg_days_in_course("A4");
+	roster.print_by_degree_type("SOFTWARE");
+	roster.remove("A3");
+	roster.remove("A3");
+	roster.print_all();
 }
