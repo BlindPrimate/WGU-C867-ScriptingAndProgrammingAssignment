@@ -32,7 +32,8 @@ Roster::Roster(const std::string students[], int student_arr_size) : class_roste
 	for (int i = 0; i < student_arr_size; i++) {
 
 		std::vector<std::string> stripped_strs;
-		std::vector<int> stripped_days;
+		std::vector<int> stripped_ints;
+		Degree tempDegree;
 		// convert student string to stringstream
 		std::stringstream ss(class_roster_raw[i]);
 		// parse strings with commas as delimiter and push into string vectors
@@ -40,30 +41,44 @@ Roster::Roster(const std::string students[], int student_arr_size) : class_roste
 			std::string new_str;
 			std::getline(ss, new_str, ',');
 			if (isInteger(new_str)) {
-				stripped_days.push_back(std::stoi(new_str));
+				stripped_ints.push_back(std::stoi(new_str));
 			}
-			stripped_strs.push_back(new_str);
+			else {
+				if (new_str == "NETWORK") {
+					tempDegree = NETWORK;
+				}
+				else if (new_str == "SECURITY") {
+					tempDegree = SECURITY;
+				} 
+				else if (new_str == "SOFTWARE") {
+					tempDegree = SOFTWARE;
+				}
+				else {
+					tempDegree = UNDECIDED;
+				}
+				stripped_strs.push_back(new_str);
+			}
 		}
 
 		// add student
 		Roster::add(stripped_strs[0], stripped_strs[1], stripped_strs[2], stripped_strs[3],
-			stripped_days[0], stripped_days[1], stripped_days[2], stripped_days[3], stripped_strs[8]);
+			stripped_ints[0], stripped_ints[1], stripped_ints[2], stripped_ints[3], tempDegree);
 
 	}
 }
 
 
 void Roster::add(std::string id, std::string first_name, std::string last_name, std::string email,
-				int age, int days_1, int days_2, int days_3, std::string degree)
+				int age, int days_1, int days_2, int days_3, int degree)
 {
 		// initialize pointer for student object
 		Student *ptr = nullptr;
 	
 		// sort student based on degree and create appropriate Student obj
-		if (degree == "NETWORK" ) {
+		if (degree == NETWORK) {
 			ptr = new NetworkStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
 		} 
-		else if (degree == "SECURITY") {
+		else if (degree == SECURITY) {
 			ptr = new SecurityStudent(id, first_name, last_name, email, age, days_1, days_2, days_3);
 		}
 		else {

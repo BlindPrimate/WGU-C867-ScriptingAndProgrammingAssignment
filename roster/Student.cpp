@@ -110,6 +110,30 @@ void Student::set_days_in_course(int day_1, int day_2, int day_3)
 
 
 void Student::print() {
+
+	std::cout << "ID: " << get_id() << "\tFirst Name: " << get_first_name()
+		<< "\tLast Name: " << get_last_name() << "\tEmail:" << get_email()
+		<< "\tAge: " << get_age() << "\tDays in Course: "
+		<< get_days_in_course();
+
+	std::cout << "\tDegree: ";
+
+	switch (get_degree_program()) {
+		case 0:
+			std::cout << "NETWORK";
+			break;
+		case 1:
+			std::cout << "SECURITY";
+			break;
+		case 2:
+			std::cout << "SOFTWARE";
+			break;
+		case 3:
+			std::cout << "OTHER";
+			break;
+	}
+	std::cout << std::endl;
+		
 	return;
 }
 

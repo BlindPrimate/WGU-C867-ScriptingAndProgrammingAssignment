@@ -7,7 +7,7 @@ class NetworkStudent :
 {
 	using Student::Student;
 	public:
-		std::string get_degree_program();
-		void print() override;
+		Degree degree = NETWORK;
+		virtual Degree get_degree_program();
 };
 

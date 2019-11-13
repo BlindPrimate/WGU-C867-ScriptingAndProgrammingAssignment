@@ -19,7 +19,7 @@ class Roster
 
 
 		void add(std::string id, std::string first_name, std::string last_name, std::string email,
-			int age, int days_1, int days_2, int days_3, std::string degree);
+			int age, int days_1, int days_2, int days_3, int degree);
 
 		void remove(std::string student_id);
 

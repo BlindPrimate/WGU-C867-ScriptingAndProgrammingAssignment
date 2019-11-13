@@ -7,7 +7,7 @@ class SoftwareStudent :
 {
 	using Student::Student;
 	public:
-		std::string get_degree_program();
-		void print() override;
+		Degree degree = SOFTWARE;
+		virtual Degree get_degree_program();
 };
 

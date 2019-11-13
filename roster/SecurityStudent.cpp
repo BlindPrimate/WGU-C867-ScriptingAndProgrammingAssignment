@@ -2,14 +2,9 @@
 #include "degree.h"
 
 
-std::string SecurityStudent::get_degree_program() {
-	return "Security";
+Degree SecurityStudent::get_degree_program() {
+	return degree;
 }
 
-void SecurityStudent::print() {
-	std::cout << "ID: " << get_id() << "\tFirst Name: " << get_first_name()
-		<< "\tLast Name: " << get_last_name() << "\tEmail:" << get_email() << "\tAge: " << get_age() << "\tDays in Course: "
-		<< get_days_in_course() << "\tDegree: " << get_degree_program() << std::endl;
-}
 
 

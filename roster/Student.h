@@ -24,7 +24,7 @@ class Student
 		~Student();
 
 		virtual void print();
-		virtual std::string get_degree_program() { return NULL; };
+		virtual Degree get_degree_program() { return UNDECIDED; };
 
 		std::string get_first_name();
 		std::string get_last_name();
